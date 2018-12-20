@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            @{Html.RenderPartial("_Grid");}
+
+
+
+            <table id="grid-selection" class="table table-condensed table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th data-column-id="iata" data-identifier="true">iata</th>
+                        <th data-column-id="lon">lon</th>
+                        <th data-column-id="iso">iso</th>
+                        <th data-column-id="status">status</th>
+                        <th data-column-id="name">name</th>
+                        <th data-column-id="continent">continent</th>
+                        <th data-column-id="type">type</th>
+                        <th data-column-id="lat">lat</th>
+                        <th data-column-id="size">size</th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+
+    @section scripts {
+
+
+        <script type="text/javascript">
+
+
+
+        $("#grid-selection").bootgrid({
+            ajax: true,
+            post: function () {
+                /* To accumulate custom parameter with the request object */
+                return {
+                    id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
+                };
+            },
+            url: "@Url.Action("GetAirports","Home")",
+
+            formatters: {
+                "link": function (column, row) {
+                    return "<a href=\"#\">" + column.id + ": " + row.id + "</a>";
+                }
+            }
+        });
+
+
+    
+        </script>
+
+    }
+
+
+
+</div>
